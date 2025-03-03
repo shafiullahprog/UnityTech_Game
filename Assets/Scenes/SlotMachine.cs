@@ -30,22 +30,18 @@ public class SlotMachine : MonoBehaviour
         isSpinning = true;
         resultText.text = "Spinning...";
 
-        // Spin each reel
         for (int i = 0; i < reels.Length; i++)
         {
             StartCoroutine(SpinReel(reels[i]));
         }
 
-        // Wait for 2 seconds to simulate spinning
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
-        // Stop each reel and assign a random item
         foreach (var reel in reels)
         {
             StopReel(reel);
         }
 
-        // Check for win/lose
         CheckResult();
 
         isSpinning = false;
@@ -53,12 +49,11 @@ public class SlotMachine : MonoBehaviour
 
     IEnumerator SpinReel(Image reel)
     {
-        float spinDuration = 2f; // Duration of the spin
+        float spinDuration = 1f;
         float elapsedTime = 0f;
 
         while (elapsedTime < spinDuration)
         {
-            // Randomly change the sprite during the spin
             reel.sprite = items[Random.Range(0, items.Length)];
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -67,13 +62,11 @@ public class SlotMachine : MonoBehaviour
 
     void StopReel(Image reel)
     {
-        // Assign a random item to the reel when it stops
         reel.sprite = items[Random.Range(0, items.Length)];
     }
 
     void CheckResult()
     {
-        // Check if all reels have the same sprite
         if (reels[0].sprite == reels[1].sprite && reels[1].sprite == reels[2].sprite)
         {
             resultText.text = "You Win!";
