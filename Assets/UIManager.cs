@@ -22,4 +22,12 @@ public class UIManager : MonoBehaviour
         foldButton.onClick.AddListener(() => player.CmdFold());
         contestButton.onClick.AddListener(() => player.CmdContest());
     }
+
+    private void Update()
+    {
+        
+    }
 }
+
+
+

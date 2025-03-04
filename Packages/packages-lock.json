@@ -268,13 +268,6 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
-    "com.unity.uiextensions": {
-      "version": "https://github.com/Unity-UI-Extensions/com.unity.uiextensions.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "35b9985bf238cde2bad9c8e107c686ba3194471c"
-    },
     "com.unity.visualscripting": {
       "version": "1.9.4",
       "depth": 0,
@@ -284,6 +277,13 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "com.veriorpies.parrelsync": {
+      "version": "https://github.com/VeriorPies/ParrelSync.git?path=/ParrelSync",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "610157ad762084380380148ba8ce14e266a6da97"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
