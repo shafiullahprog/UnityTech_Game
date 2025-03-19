@@ -1,33 +1,45 @@
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
-
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-    public Text roundInfoText;
-    public Button foldButton, contestButton;
+
+    public GameObject decisionPanel;
+    public TextMeshProUGUI winnerText;
+    public Button foldButton;
+    public Button contestButton;
 
     private void Awake()
     {
         Instance = this;
+        decisionPanel.SetActive(false);
     }
 
-    public void ShowWinner(int winnerId)
+    public void ShowDecisionPanel(PlayerManager player)
     {
-        roundInfoText.text = $"Player {winnerId} Wins!";
-    }
+        decisionPanel.SetActive(true);
+        // Dynamically assign button functions
+        foldButton.onClick.RemoveAllListeners();
+        contestButton.onClick.RemoveAllListeners();
 
-    public void SetUpButtons(PlayerManager player)
-    {
         foldButton.onClick.AddListener(() => player.CmdFold());
         contestButton.onClick.AddListener(() => player.CmdContest());
     }
 
-    private void Update()
+    public void HideDecisionPanel()
     {
-        
+        decisionPanel.SetActive(false);
+    }
+
+    public void ShowDecisionUI()
+    {
+        decisionPanel.SetActive(true);
+    }
+
+    public void ShowWinner(PlayerManager winner)
+    {
+        decisionPanel.SetActive(false);
+        winnerText.text = winner ? $"Winner: Player {winner.netId} Number: {winner.assignedNumber}" : "No Winner";
     }
 }
-
-
-

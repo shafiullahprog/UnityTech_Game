@@ -3,36 +3,32 @@ using UnityEngine;
 
 public class PlayerManager : NetworkBehaviour
 {
-    [SyncVar] public int playerId;
     [SyncVar] public int assignedNumber;
     [SyncVar] public bool hasFolded;
     [SyncVar] public int chips = 100;
-    
-    private void Start()
+    [SyncVar] public bool isReady;
+
+    private GameManager gameManager;
+
+    public override void OnStartServer()
     {
-        if (isLocalPlayer)
+        gameManager = GameManager.Instance;
+        gameManager.RegisterPlayer(this);
+    }
+
+    [Command]
+    public void CmdFold() => gameManager.PlayerFold(this);
+
+    [Command]
+    public void CmdContest() => gameManager.PlayerContest(this);
+
+    [Command]
+    public void CmdPlaceBet(int amount)
+    {
+        if (chips >= amount)
         {
-            CmdAssignRandomNumber();
+            chips -= amount;
+            gameManager.RegisterBet(this, amount);
         }
-    }
-
-    [Command]
-    public void CmdAssignRandomNumber()
-    {
-        assignedNumber = Random.Range(1, 101);
-    }
-
-    [Command]
-    public void CmdFold()
-    {
-        hasFolded = true;
-        GameManager.Instance.CheckRoundState();
-    }
-
-    [Command]
-    public void CmdContest()
-    {
-        hasFolded = false;
-        GameManager.Instance.CheckRoundState();
     }
 }
