@@ -5,6 +5,6 @@ public class LobbyManager : NetworkRoomManager
     public override void OnRoomServerPlayersReady()
     {
         base.OnRoomServerPlayersReady();
-        //GameManager.Instance.StartRound();
+        GameManager.Instance.StartRound();
     }
 }
